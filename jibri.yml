@@ -5,29 +5,24 @@ services:
     image: jitsi/jibri:${JITSI_IMAGE_VERSION:-unstable}
     restart: ${RESTART_POLICY:-unless-stopped}
 
-    # 🔥 MOST IMPORTANT FIX
     privileged: true
-
     shm_size: '2gb'
 
-    # 🔥 AUDIO + CHROME SUPPORT
     devices:
       - /dev/snd:/dev/snd
 
     volumes:
       - ${CONFIG}/jibri:/config
+      - ./jibri/finalize.sh:/config/finalize.sh
       - /dev/shm:/dev/shm
       - /tmp:/tmp
 
     environment:
-      # 🔥 REQUIRED FOR CHROME
       - DISPLAY=:0
       - CHROMIUM_FLAGS=--no-sandbox --disable-dev-shm-usage
 
-      # 🔥 S3 FLOW TRIGGER
       - JIBRI_FINALIZE_RECORDING_SCRIPT_PATH=/config/finalize.sh
 
-      # keep your existing vars
       - JIBRI_XMPP_USER
       - JIBRI_XMPP_PASSWORD
       - JIBRI_RECORDER_USER
