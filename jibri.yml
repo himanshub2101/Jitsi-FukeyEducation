@@ -17,6 +17,10 @@ services:
       - /dev/shm:/dev/shm
       - /tmp:/tmp
 
+      # 🔥 ADD THESE
+      - /usr/bin/aws:/usr/bin/aws
+      - /root/.aws:/root/.aws
+
     environment:
       - DISPLAY=:0
       - CHROMIUM_FLAGS=--no-sandbox --disable-dev-shm-usage
