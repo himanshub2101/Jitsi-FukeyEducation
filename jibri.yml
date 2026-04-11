@@ -20,7 +20,7 @@ services:
     environment:
       - DISPLAY=:0
       - CHROMIUM_FLAGS=--no-sandbox --disable-dev-shm-usage
-
+      - AUDIO_DEVICE=plug:amix
       - JIBRI_FINALIZE_RECORDING_SCRIPT_PATH=/config/finalize.sh
 
       - JIBRI_XMPP_USER
